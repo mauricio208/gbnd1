@@ -1,7 +1,16 @@
-<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false"
-data-use-continue-as="false"  >
+<div class="row row-login">
+    <div class="jumbotron jumbotron-fluid d-flex align-items-center jumbotron-facebook-login">
+            <div class="container facebook-login-container">
+                <h1 class="display-4">Welcome to GrowthBond</h1>
+                <p class="lead">We are pleased to have you with us. To proceed please give your authorization for acces you Ads statictics on facebook</p>
+                <button (click)="facebookLogin()" class="btn btn-lg btn-facebook-auth" ><fa-icon [icon]="['fab', 'facebook']"></fa-icon>
+                    Authorize GrowthBond</button>
+            </div>
+        </div>               
 </div>
 
-<button (click)="facebookLogin()" >LOGIN</button>
 
-<button (click)="facebookLogout()">LOGOUT</button>
+
+
+
+

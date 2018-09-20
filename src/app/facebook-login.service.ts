@@ -3,6 +3,7 @@ import { FacebookService, InitParams, LoginResponse } from 'ngx-facebook';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import { AuthService } from './auth.service'
 
 
 const httpOptions = {
@@ -18,10 +19,14 @@ const httpOptions = {
 export class FacebookLoginService {
 
   storeLoginData(data: LoginResponse): Observable<LoginResponse> {
+
+    this.auth.addToSession(data);
+    
     return this.http.post<LoginResponse>(this.fbUserDataUrl, data, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
+    
   }
 
   init(): void {
@@ -73,5 +78,5 @@ export class FacebookLoginService {
 
   private fbUserDataUrl = 'http://localhost:3000/user/store-facebook-data';
 
-  constructor(private fb: FacebookService, private http:HttpClient) { }
+  constructor(private fb: FacebookService, private http:HttpClient, private auth:AuthService) { }
 }

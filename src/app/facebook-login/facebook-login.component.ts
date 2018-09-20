@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FacebookLoginService } from '../facebook-login.service'
+import { AuthService } from '../auth.service'
 declare var window: any;
 
 @Component({
@@ -18,7 +19,11 @@ export class FacebookLoginComponent implements OnInit {
     this.fbs.logout();
   }
 
-  constructor(private fbs: FacebookLoginService) { 
+  showAuthData(): void{
+    console.log(this.auth.getSession())
+  }
+
+  constructor(private fbs: FacebookLoginService, private auth: AuthService) { 
     fbs.init()
   }
   ngOnInit() {

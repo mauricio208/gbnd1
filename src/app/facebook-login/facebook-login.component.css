@@ -1,0 +1,16 @@
+.btn-facebook-auth{
+    background-color: #3B5999;
+    color: white;
+}
+
+.facebook-login-container{
+    text-align: center;
+}
+
+.jumbotron-facebook-login{
+    background-color: whitesmoke
+}
+
+.row-login{
+    height:100vh;
+}

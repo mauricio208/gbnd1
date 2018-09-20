@@ -5,7 +5,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { FacebookModule } from 'ngx-facebook';
 import { FacebookLoginComponent } from './facebook-login/facebook-login.component';
+import { UiModule } from './ui/ui.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
 
+import { faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faFacebook)
 @NgModule({
   declarations: [
     AppComponent,
@@ -14,8 +21,9 @@ import { FacebookLoginComponent } from './facebook-login/facebook-login.componen
   imports: [
     BrowserModule,
     HttpClientModule,
-    FacebookModule.forRoot()
-
+    FacebookModule.forRoot(),
+    FontAwesomeModule,
+    UiModule
   ],
   providers: [],
   bootstrap: [AppComponent]
