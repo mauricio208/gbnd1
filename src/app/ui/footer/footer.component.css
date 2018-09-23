@@ -1,9 +1,10 @@
 .footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
     color: whitesmoke;
-    padding: 1rem;
     background-color: #343A40;
     text-align: center;
+    position: relative;
+    margin-top: -100px; /* negative value of footer height */
+    height: 100px;
+    clear:both;
+    padding-top:20px;
   }

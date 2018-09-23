@@ -1,0 +1,18 @@
+<div class="row flex-fill d-flex align-items-center ">
+    <div class="col-12 justify-content-center">
+        <div>
+            <h4>Please select the Facebook Ad account to use for GrowthBond</h4>
+        </div>
+            <div class="list-group mx-auto">
+                <form class="w-25" (ngSubmit)="selectAdaccount()"
+                *ngFor="let adac of adaccounts" >
+                        <input type="text" class="form-control" id="{{adac.id}}" name="{{adac.id}}"
+                        value="{{adac.id}}"
+                        [(ngModel)]="selectedAdaccount" hidden>
+                        <button type="submit" class="list-group-item list-group-item-action" >{{adac.business_name}} - {{adac.business_city}}</button>
+                        <!--account_id account_status age balance business_city business_name currency-->  
+                    </form>
+            
+            </div>
+    </div>
+</div>

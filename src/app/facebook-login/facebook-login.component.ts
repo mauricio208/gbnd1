@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router'
 import { FacebookLoginService } from '../facebook-login.service'
 import { AuthService } from '../auth.service'
 declare var window: any;
@@ -11,8 +12,9 @@ declare var window: any;
 export class FacebookLoginComponent implements OnInit {
 
   facebookLogin(): void {
-    console.log('calling login')
-    this.fbs.login() 
+    this.fbs.login().then(resp=>{
+      this.router.navigate(['fbadaccounts']);
+    })
   }
 
   facebookLogout(): void{
@@ -23,7 +25,7 @@ export class FacebookLoginComponent implements OnInit {
     console.log(this.auth.getSession())
   }
 
-  constructor(private fbs: FacebookLoginService, private auth: AuthService) { 
+  constructor(private router: Router, private fbs: FacebookLoginService, private auth: AuthService) { 
     fbs.init()
   }
   ngOnInit() {

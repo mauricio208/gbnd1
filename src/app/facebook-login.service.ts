@@ -21,7 +21,6 @@ export class FacebookLoginService {
   storeLoginData(data: LoginResponse): Observable<LoginResponse> {
 
     this.auth.addToSession(data);
-    
     return this.http.post<LoginResponse>(this.fbUserDataUrl, data, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -38,15 +37,11 @@ export class FacebookLoginService {
     this.fb.init(initParams);
   }
   
-  login(loginOptions={ scope:"ads_read",
-    return_scopes: true}): void {
-    this.fb.login(loginOptions)
-      .then((response: LoginResponse) => {
-        console.log('storing?', response);
-        let storeRes = this.storeLoginData(response);
-        storeRes.subscribe(res=>console.log('this is a response:',res));
-      })
-      .catch((error: any) => console.error(error));
+  async login(loginOptions={ scope:"ads_read",
+    return_scopes: true}): Promise<any> {
+    let loginResponse = await this.fb.login(loginOptions)
+    let storeRes = await this.storeLoginData(loginResponse).subscribe();
+    return loginResponse
   }
 
   logout():void{
@@ -58,6 +53,18 @@ export class FacebookLoginService {
       .then(function(response) {
         console.log(response)
       });
+  }
+
+  async getAdAccounts(): Promise<any>{
+    let userData = this.auth.getSession();
+    let adaccounts = await this.fb.api(`${userData['authResponse'].userID}/adaccounts`)
+    let adaccountsData = [];
+    for (const adac of adaccounts['data']) {
+      let data = await this.fb.api(adac.id,"get",{fields:"id,account_id,age,account_status,business_name,balance,currency,business_city"})
+      console.log(data)
+      adaccountsData.push(data); 
+    }
+    return adaccountsData;
   }
 
   private handleError(error: HttpErrorResponse) {
