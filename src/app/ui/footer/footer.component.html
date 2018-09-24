@@ -1,13 +1,24 @@
-<footer class="footer">
+<footer class="">
   <div class="container-fluid">
-    <div class="row">
-        <div class="col-8">
-            <img src="../../../assets/img/svg/white_logo_transparent.svg" height="30" alt="">  © 2018 
+    <div class="row footer">
+        <div class="col-8 mx-auto d-flex align-items-center justify-content-center">
+           <span clas="d-flex p-2">
+              <img src="../../../assets/img/svg/white_logo_transparent.svg" height="30" alt="">© 2018 
+           </span> 
           </div>
-          <div class="col-4">
-            <div class="col">Contact</div>
-            <div class="col social">
-              
+          <div class="col-4 text-center clearfix">
+            <div class="col-social">
+              <span class="lead">Contact us</span> 
+              <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex justify-content-center">              
+                  <li class="nav-item">
+                    <a class="nav-link p-2" href="https://www.facebook.com/growthbond.co/" target="_blank" rel="noopener" aria-label="Facebook"> 
+                    <fa-icon [icon]="['fab', 'facebook']" size="2x"></fa-icon></a>
+                  </li>            
+                  <li class="nav-item">
+                    <a class="nav-link p-2" href="https://www.linkedin.com/company/growthbond/" target="_blank" rel="noopener" aria-label="LinkedIn"> 
+                    <fa-icon [icon]="['fab', 'linkedin-in']" size="2x"></fa-icon></a>
+                  </li>
+              </ul>
             </div>
           </div>
       </div>

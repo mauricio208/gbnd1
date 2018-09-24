@@ -19,8 +19,8 @@ export class FbAdaccountsComponent implements OnInit {
     });
   }
 
-  selectAdaccount(adacId): void{
-    console.log('Account Selected :', this.selectedAdaccount);
+  selectAdaccount(selectedId): void{
+    console.log('Account Selected :', selectedId);
   }
 
   constructor(private fbs: FacebookLoginService, private auth: AuthService) { }

@@ -4,8 +4,17 @@
 
 h4{
     text-align: center;
+    font-weight: 300;
 }
 
 .add-accounts-container{
     padding: 30px;
+}
+
+.select-adac-message{
+    padding: 5vh;
+}
+
+.jumbotron{
+    background-color: azure;
 }

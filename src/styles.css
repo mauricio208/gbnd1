@@ -1,9 +1,22 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~font-awesome/css/font-awesome.css";
-
+@import url("http://fonts.googleapis.com/css?family=Open+Sans");
 html, body {
     height: 100%;
 }
 #footer-pusher{
     min-height: 100%;
+}
+body {
+	color: #333 !important;
+	background: #fff !important;
+	font: 16px/1.2 "Open Sans", "Arial", sans-serif !important;
+	min-width: 320px !important;
+	-webkit-font-smoothing: antialiased !important;
+	-moz-osx-font-smoothing: grayscale !important;
+}
+
+.gbnd-btn-primary{
+    background-color: #4C9EE7;
+    color: white;
 }
