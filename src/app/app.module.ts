@@ -11,11 +11,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
-import { } from '@fortawesome/free-solid-svg-icons';
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import { FbAdaccountsComponent } from './fb-adaccounts/fb-adaccounts.component';
 import { AppRoutingModule } from './app-routing.module';
 
-library.add(faFacebook)
+library.add(faFacebook,faCircleNotch)
 @NgModule({
   declarations: [
     AppComponent,

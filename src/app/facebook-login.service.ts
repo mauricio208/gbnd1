@@ -67,6 +67,16 @@ export class FacebookLoginService {
     return adaccountsData;
   }
 
+  async getCampaignsData(adacId: String): Promise<any>{
+    let campaigns = await this.fb.api(`${adacId}/campaigns`);
+    let cpsCollectedData =[];
+    for (const cp of campaigns.data) {
+      let cpData = await this.fb.api(`${cp.id}`,"get",{fields:"name,objective,status,spend_cap,lifetime_budget"});
+      cpsCollectedData.push(cpData);
+    }
+    return cpsCollectedData;
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
