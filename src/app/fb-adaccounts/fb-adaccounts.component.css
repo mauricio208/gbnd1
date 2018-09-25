@@ -19,6 +19,7 @@ h4{
     background-color: azure;
 }
 
-.row{
-    height: 100%;
+.spinner{
+  z-index: 999;
+  margin-top: 25vh;
 }
