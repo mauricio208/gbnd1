@@ -20,10 +20,10 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.json()); // for parsing application/json
+app.use(express.static(path.join(__dirname, '../dist/growth-bond')));
+app.use(bodyParser.json());
+console.log(path.join(__dirname, '../dist'));
 
-app.use('/', indexRouter);
 app.use('/user', usersRouter);
 
 module.exports = app;
