@@ -17,7 +17,7 @@
                 </label>
             </div>      
         </div>
-        <div *ngIf="campaignData">
+        <!-- <div *ngIf="campaignData">
             <div *ngIf="campaignData.length === 0">
                 <h4 class="lead">Sorry that account has no ad campaigns</h4>
                 <button class="btn btn-secondary" (click)="selectAdacAgain()">Select another adaccount</button>
@@ -37,6 +37,12 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
+    <div class="col-12 flow-buttons d-flex justify-content-center">
+        <button class="btn btn-primary back-button" (click)="back()">Back</button>
+
+        <button class="btn btn-primary" (click)="continue()">Continue</button>
+    </div>
+    
 </div>

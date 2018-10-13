@@ -7,6 +7,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFacebook, faLinkedinIn,  } from '@fortawesome/free-brands-svg-icons';
 import { } from '@fortawesome/free-solid-svg-icons';
+import { FlowButtonsComponent } from './flow-buttons/flow-buttons.component';
 
 library.add(faFacebook, faLinkedinIn)
 @NgModule({
@@ -14,7 +15,7 @@ library.add(faFacebook, faLinkedinIn)
     CommonModule,
     FontAwesomeModule
   ],
-  declarations: [LayoutComponent, HeaderComponent, FooterComponent],
+  declarations: [LayoutComponent, HeaderComponent, FooterComponent, FlowButtonsComponent],
   exports: [LayoutComponent]
 })
 export class UiModule { }

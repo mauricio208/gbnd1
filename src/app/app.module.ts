@@ -14,13 +14,17 @@ import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import { FbAdaccountsComponent } from './fb-adaccounts/fb-adaccounts.component';
 import { AppRoutingModule } from './app-routing.module';
+import { FbPageComponent } from './fb-page/fb-page.component';
+import { PaymentComponent } from './payment/payment.component';
 
 library.add(faFacebook,faCircleNotch)
 @NgModule({
   declarations: [
     AppComponent,
     FacebookLoginComponent,
-    FbAdaccountsComponent
+    FbAdaccountsComponent,
+    FbPageComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,

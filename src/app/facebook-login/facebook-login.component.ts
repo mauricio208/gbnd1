@@ -13,7 +13,7 @@ export class FacebookLoginComponent implements OnInit {
 
   facebookLogin(): void {
     this.fbs.login().then(resp=>{
-      this.router.navigate(['fbadaccounts']);
+      this.router.navigate(['fbpage']);
     })
   }
 

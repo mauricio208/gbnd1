@@ -1,0 +1,27 @@
+<div class="row row-login flex-fill d-flex align-items-center">
+    <!-- <div class="d-flex spinner" *ngIf="spinnerOn">
+        <fa-icon [icon]="['fa', 'circle-notch']" [spin]="true" size="8x"></fa-icon>  
+    </div> -->
+    <div class="col-12">
+        <h4>Please select the Facebook page to use for GrowthBond</h4>
+        <div class="col-12 jumbotron justify-content-center">
+            <div class="d-flex justify-content-center d-flex align-items-center">
+                <div *ngIf="fbPages" class="p-4">
+                    <select class="form-control form-control-lg" name="topics" [(ngModel)]="pageSelected">
+                        <option *ngFor="let page of fbPages.data" [ngValue]="page">  
+                                {{page.name}}                   
+                        </option>
+                    </select>
+                </div>
+                <div  class="p-2">
+                    <img [src]="pageSelected.picture.data.url" class="rounded" alt="Facebook's page thumbnail">
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-12 flow-buttons d-flex justify-content-center">
+            <button class="btn btn-primary" (click)="continue()">Continue</button>
+        </div>
+    </div>
+</div>
+

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FacebookLoginService } from '../facebook-login.service'
+import { FacebookLoginService } from '../facebook-login.service';
+import {Location} from '@angular/common';
+import {Router} from '@angular/router';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -12,6 +14,15 @@ export class FbAdaccountsComponent implements OnInit {
   adaccountSelected:  Boolean;
   campaignData: Array<object>;
   spinnerOn: Boolean;
+  
+
+  back():void{
+    this.location.back();
+  }
+  
+  continue():void{
+    this.router.navigate(['payment']);
+  }
 
   getAdAccountsIds(): void {
     this.spinnerOn=true;
@@ -26,19 +37,26 @@ export class FbAdaccountsComponent implements OnInit {
     console.log('Account Selected :', selectedId);
     this.spinnerOn=true;
     this.adaccountSelected=true;
-    this.fbs.getCampaignsData(selectedId).then(data=>{
-      console.log(data);
-      this.campaignData=data
-      this.spinnerOn=false;
-    });
+    // this.fbs.getCampaignsData(selectedId).then(data=>{
+    //   console.log(data);
+    //   this.campaignData=data
+    //   this.spinnerOn=false;
+    // });
+    this.dataToSession(selectedId);
+    this.continue();
   }
+  
+  dataToSession(adacId):void{
+    this.auth.addToSession({adaccountSelected:adacId});
+  }
+
 
   selectAdacAgain():void{
     this.adaccountSelected=false;
     this.campaignData=null;
   }
 
-  constructor(private fbs: FacebookLoginService, private auth: AuthService) { }
+  constructor(private location: Location, private router: Router, private fbs: FacebookLoginService, private auth: AuthService) { }
 
   ngOnInit() {
     this.getAdAccountsIds()

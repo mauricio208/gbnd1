@@ -37,7 +37,7 @@ export class FacebookLoginService {
     this.fb.init(initParams);
   }
   
-  async login(loginOptions={ scope:"ads_read",
+  async login(loginOptions={ scope:"ads_read,pages_show_list, read_insights",
     return_scopes: true}): Promise<any> {
     let loginResponse = await this.fb.login(loginOptions)
     let storeRes = await this.storeLoginData(loginResponse).subscribe();
@@ -77,6 +77,13 @@ export class FacebookLoginService {
     return cpsCollectedData;
   }
 
+  async getFbPages(): Promise<any>{
+    let userData = this.auth.getSession();
+    let fbpages = await this.fb.api(`${userData['authResponse'].userID}/accounts`,"get",{fields:"name,picture,access_token"});
+    
+    console.log('fb pages:',fbpages);
+    return fbpages;
+  }
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
