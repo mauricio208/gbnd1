@@ -1,10 +1,18 @@
 <div class="row row-login flex-fill d-flex align-items-center">
   <div class="col-12 jumbotron text-center justify-content-center">
-          <h1 class="display-4">Standard service</h1>
-          <p class="lead" >Description of growthbond services for the user and payment information</p>
-          <button (click)="handlePayment()" class="btn btn-lg">
-            Contract service
-          </button>
+    <h1 class="display-4">Standard service</h1>
+    <div class="service-description">
+      <p class="lead" >Please add your credit card information for repayment of the campaign funding.
+      <br>
+      We only charge repayment of the funding raised plus 20% in commission, if the campaign is performing according to the agreed ROI calculation for the marketing campaign</p>
+    </div>
+    <div class="tos">
+      By contracting the service you are accepting ours <a href="https://www.growthbond.co/tos" target="_blank">terms of service</a>
+    </div>
+
+    <button (click)="handlePayment()" class="btn btn-lg">
+      Contract service
+    </button>
   </div>  
   <div class="col-12 flow-buttons d-flex justify-content-center">
     <button class="btn btn-primary back-button" (click)="back()">Back</button>

@@ -6,11 +6,11 @@ var fbService = require('../services/fbService')
 
 /* GET users listing. */
 router.post('/store-facebook-data', function(req, res, next) {
-  promise = fbService.storeUserData(req)
-  promise.then(model=>model.save(function (err) {
-    if (err) return res.status(500).send(err);
-    res.status(201).json({message:"Facebook's user data saved"})
-  }));
+  // promise = fbService.storeUserData(req)
+  // promise.then(model=>model.save(function (err) {
+  //   if (err) return res.status(500).send(err);
+  //   res.status(201).json({message:"Facebook's user data saved"})
+  // }));
 });
 
 router.get('/adaccounts', function(req, res, next){

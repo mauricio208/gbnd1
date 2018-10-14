@@ -10,7 +10,7 @@ import {Location} from '@angular/common';
 })
 export class PaymentComponent implements OnInit {
   handler: any;
-  amount = 500;
+  // amount = 500;
 
   back():void{
     this.location.back();
@@ -25,8 +25,7 @@ export class PaymentComponent implements OnInit {
       locale: 'auto',
       token: token => {
         this.pay.sendPaymentData({
-          "token":token,
-          "amount":this.amount,
+          "stripeToken":token,
           "userData":this.auth.getSession()
         })
       }
@@ -37,7 +36,7 @@ export class PaymentComponent implements OnInit {
     this.handler.open({
       name: 'Growthbond',
       description: 'Growthbond services',
-      amount: this.amount
+      // amount: this.amount
     });
   }
 

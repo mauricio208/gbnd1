@@ -63,5 +63,4 @@ export class FbAdaccountsComponent implements OnInit {
     this.adaccountSelected = false;
   }
 
-
 }

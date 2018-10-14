@@ -18,15 +18,15 @@ const httpOptions = {
 })
 export class FacebookLoginService {
 
-  storeLoginData(data: LoginResponse): Observable<LoginResponse> {
+  // storeLoginData(data: LoginResponse): Observable<LoginResponse> {
 
-    this.auth.addToSession(data);
-    return this.http.post<LoginResponse>(this.fbUserDataUrl, data, httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
+  //   this.auth.addToSession(data);
+  //   // return this.http.post<LoginResponse>(this.fbUserDataUrl, data, httpOptions)
+  //   //   .pipe(
+  //   //     catchError(this.handleError)
+  //   //   );
     
-  }
+  // }
 
   init(): void {
     let initParams: InitParams = {
@@ -40,7 +40,16 @@ export class FacebookLoginService {
   async login(loginOptions={ scope:"ads_read,pages_show_list, read_insights",
     return_scopes: true}): Promise<any> {
     let loginResponse = await this.fb.login(loginOptions)
-    let storeRes = await this.storeLoginData(loginResponse).subscribe();
+    console.log(loginResponse)
+    let userNamesEmail = await this.fb.api(`${loginResponse.authResponse.userID}`,'get',{fields: 'name, email'})
+    this.auth.addToSession({
+      userName:userNamesEmail.name,
+      userEmail:userNamesEmail.email,
+      fbAuthToken:loginResponse.authResponse.accessToken,
+      fbUserID:loginResponse.authResponse.userID,
+      fbScopes:loginResponse.authResponse.grantedScopes      
+    })
+    console.log(this.auth.getSession())
     return loginResponse
   }
 
@@ -57,11 +66,10 @@ export class FacebookLoginService {
 
   async getAdAccounts(): Promise<any>{
     let userData = this.auth.getSession();
-    let adaccounts = await this.fb.api(`${userData['authResponse'].userID}/adaccounts`)
+    let adaccounts = await this.fb.api(`${userData['fbUserID']}/adaccounts`)
     let adaccountsData = [];
     for (const adac of adaccounts['data']) {
       let data = await this.fb.api(adac.id,"get",{fields:"id,account_id,age,account_status,business_name,balance,currency,business_city"})
-      console.log(data)
       adaccountsData.push(data); 
     }
     return adaccountsData;
@@ -79,7 +87,7 @@ export class FacebookLoginService {
 
   async getFbPages(): Promise<any>{
     let userData = this.auth.getSession();
-    let fbpages = await this.fb.api(`${userData['authResponse'].userID}/accounts`,"get",{fields:"name,picture,access_token"});
+    let fbpages = await this.fb.api(`${userData['fbUserID']}/accounts`,"get",{fields:"name,picture,access_token"});
     
     console.log('fb pages:',fbpages);
     return fbpages;
