@@ -24,7 +24,7 @@ export class PaymentComponent implements OnInit {
       image: '',
       locale: 'auto',
       token: token => {
-        this.pay.sendPaymentData({
+        this.pay.initializeUser({
           "stripeToken":token,
           "userData":this.auth.getSession()
         })

@@ -1,20 +1,27 @@
-var express = require('express');
-var router = express.Router();
-var fbDataModel = require('../db/models/facebookData')
-var fbService = require('../services/fbService')
+const express = require('express');
+const router = express.Router();
+const userService = require('../services/userService');
+const stripeService = require('../services/stripeService');
+const fbService = require('../services/fbService');
 
-
-/* GET users listing. */
-router.post('/store-facebook-data', function(req, res, next) {
-  // promise = fbService.storeUserData(req)
-  // promise.then(model=>model.save(function (err) {
-  //   if (err) return res.status(500).send(err);
-  //   res.status(201).json({message:"Facebook's user data saved"})
-  // }));
+router.post('/init', function(req, res, next) {
+  // console.log('test:', req);
+  console.log('body:', req.body,'\n\n')
+  let data = req.body
+  stripeService.createStripeCustomer(data.stripeToken.id, data.stripeToken.email, "Growthbond first time customer").then(customer=>{
+    res.status(201).json({message:"Stripe data added"});
+    userService.initUser({userData:req.body.userData, stripe:customer});
+  }).catch(error=>{
+    res.status(500).json({error:error});
+    console.error(error)
+  });
 });
 
-router.get('/adaccounts', function(req, res, next){
-  
+router.get('/adaccount/insights', function(req, res, next){
+  fbService.getAdaccountInsights('10214261926481249','5bc80eadf459724e0755fa8c').then(result=>{
+    console.log(result)
+    res.send(result)
+  })
 });
 
 module.exports = router;

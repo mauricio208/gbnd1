@@ -1,27 +1,37 @@
-var userModel = require('../db/models/user')
-var fbDataModel = require('../db/models/facebookData')
-var gbndFbCModel = require('../db/models/gbndFbCampaign')
+const userModel = require('../db/models/user')
+const fbDataModel = require('../db/models/facebookData')
 
 module.exports = {
     initUser: async function(data){
-        var UserSchema = new Schema({
-            name: String,
-            email: String,
-            password: String,
-            facebook_data: { type: Schema.Types.ObjectId, ref: 'FacebookData' },
-            stripeData: Object
-        });
-
-        // var userStripe = new fbDataModel({
-        //     names: req.body.status,
-        //     email:,
-        //     authResponse: req.body.authResponse
-        // });
-        return userFbData.save()
-
-
+        console.log('DATOS:', data);
+        try {
+            let fbData = new fbDataModel({
+                fbAuthToken: data.userData.fbAuthToken,
+                fbUserID: data.userData.fbUserID,
+                fbScopes : data.userData.fbScopes,
+                gbndFbCampaigns: [{
+                    adAccountSelected: data.userData.adaccountSelected,
+                    fbPageSelected: data.userData.fbpageSelected
+                }] 
+            })
+            let newFbData = await fbData.save()
+            let newUser = new userModel({
+                name: data.userData.userName,
+                email: data.userData.email,
+                facebookData: newFbData.id,
+                stripeData: data.stripe
+            });
+            return await newUser.save()
+        } catch (error) {
+            console.log(error)
+            console.error(error)
+            return error;
+        }
     },
+    getUser: function (fbId) {
 
+        
+    },
     chargeUser: async function(stripeCustomerId, amount, description){
         const charge = await stripe.charges.create({
           amount: 1000,

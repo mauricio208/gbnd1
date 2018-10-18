@@ -1,6 +1,6 @@
-var FB = require('fb');
-var mongoose = require('mongoose');
-var fbDataModel = require('../db/models/facebookData')
+const FB = require('fb');
+const fbDataModel = require('../db/models/facebookData')
+const userModel = require('../db/models/user')
 
 fb = new FB.Facebook({
     appId      : process.env['APP_ID'],
@@ -12,7 +12,7 @@ fb = new FB.Facebook({
 module.exports = {
 
     storeUserData: async function(req){
-        var userFbData = new fbDataModel({
+        let userFbData = new fbDataModel({
             status: req.body.status,
             authResponse: req.body.authResponse
         });
@@ -22,11 +22,14 @@ module.exports = {
         return userFbData
     },
 
-    getAdaccounts: async function(userID, accessToken) {
-       
-        fb.setAccessToken(accessToken);
-        let adaccounts = await fb.api(`${userID}/adaccounts`);
-        return adaccounts
+    getAdaccountInsights: async function(fbUserID, gbndCampaignId, fields) {
+        let fbData = await fbDataModel.findOne({fbUserID:fbUserID});
+        console.log('selected', fbData)
+        let campaign = fbData.gbndFbCampaigns.id(gbndCampaignId)
+        
+        fb.setAccessToken(fbData.fbAuthToken);
+        let adaccountsInsights = await fb.api(`${campaign.adAccountSelected}/insights`,{fields:"clicks,frequency,inline_post_engagement"});
+        return adaccountsInsights
     },
 
     getCampaings: function (adaccountId){

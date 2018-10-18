@@ -5,7 +5,7 @@ var UserSchema = new Schema({
     name: String,
     email: String,
     password: String,
-    facebook_data: { type: Schema.Types.ObjectId, ref: 'FacebookData' },
+    facebookData: { type: Schema.Types.ObjectId, ref: 'FacebookData' },
     stripeData: Object
 });
 

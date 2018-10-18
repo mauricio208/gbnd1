@@ -2,16 +2,21 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+  })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaymentService {
   
-  async sendPaymentData(data):Promise<any>{
-    // this.auth.userId  add this to data sended
-    //  await this.http.post('http://localhost:3000/user/charge-payment', JSON.stringify(data))       
-    console.log(data);
+  async initializeUser(data):Promise<any>{
+    let response = await this.http.post('http://localhost:3000/user/init', JSON.stringify(data), httpOptions).toPromise();
+    console.log()
+
   }
 
 

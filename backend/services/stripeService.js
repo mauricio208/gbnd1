@@ -1,8 +1,10 @@
-const stripe = require("stripe")(process.env['STRIPE_ID']);
-var userModel = require('../db/models/user')
+var stripe = require("stripe")(process.env['STRIPE_SECRET_KEY'])
+const userModel = require('../db/models/user')
 
 module.exports = {
     createStripeCustomer: async function(clientToken, email, description){
+        console.log('ENV:>>>>>',process.env)
+        console.log('KEY:',process.env['STRIPE_SECRET_KEY'])
         const customer = await stripe.customers.create({
             source: clientToken,
             email: email,
@@ -11,14 +13,14 @@ module.exports = {
         return customer;
     },
 
-    chargeUser: async function(stripeCustomerId, amount, description){
-        const charge = await stripe.charges.create({
-          amount: 1000,
-          currency: 'usd',
-          description:description,
-          customer: stripeCustomerId,
-        });
-    }
+    // chargeUser: async function(stripeCustomerId, amount, description){
+    //     const charge = await stripe.charges.create({
+    //       amount: 1000,
+    //       currency: 'usd',
+    //       description:description,
+    //       customer: stripeCustomerId,
+    //     });
+    // }
     
 }
     // Create a Customer:
