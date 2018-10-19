@@ -19,7 +19,14 @@ router.post('/init', function(req, res, next) {
 
 router.get('/adaccount/insights', function(req, res, next){
   fbService.getAdaccountInsights('10214261926481249','5bc80eadf459724e0755fa8c').then(result=>{
-    console.log(result)
+    // console.log(result)
+    res.send(result)
+  })
+});
+
+router.get('/page/insights', function(req, res, next){
+  fbService.getPageInsights('10214261926481249','5bc9514eb47f4770c97734f3').then(result=>{
+    // console.log(result)
     res.send(result)
   })
 });

@@ -3,9 +3,9 @@ var Schema = mongoose.Schema;
 
 var GbndFbCampaign = new Schema({
     adAccountSelected: String,
-    fbPageSelected: String,
+    fbPageSelected: Object,
     adAccountData:Object,
-    fbPageSelected:Object
+    fbPageData:Object
 });
 
 var FacebookDataSchema = new Schema({

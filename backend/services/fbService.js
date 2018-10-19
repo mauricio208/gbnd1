@@ -1,3 +1,4 @@
+const got  = require('got');
 const FB = require('fb');
 const fbDataModel = require('../db/models/facebookData')
 const userModel = require('../db/models/user')
@@ -8,6 +9,16 @@ fb = new FB.Facebook({
     xfbml      : true,
     version    : 'v3.1'
 });
+
+async function fbGetAllPages(responseObject){
+    let results = responseObject.data;
+    while (responseObject.paging.next){
+        response = await got(responseObject.paging.next, {json:true});
+        responseObject = response.body;  
+        results = results.concat(responseObject.data);
+    }
+    return results;
+}
 
 module.exports = {
 
@@ -29,7 +40,30 @@ module.exports = {
         
         fb.setAccessToken(fbData.fbAuthToken);
         let adaccountsInsights = await fb.api(`${campaign.adAccountSelected}/insights`,{fields:"clicks,frequency,inline_post_engagement"});
-        return adaccountsInsights
+        
+        return fbGetAllPages(adaccountsInsights)
+    },
+
+    getPageInsights: async function(fbUserID, gbndCampaignId, metrics) {
+        let fbData = await fbDataModel.findOne({fbUserID:fbUserID});
+        console.log('selected', fbData)
+        let campaign = fbData.gbndFbCampaigns.id(gbndCampaignId)
+        fb.setAccessToken(campaign.fbPageSelected.access_token);
+        
+        let options = {
+            date_preset:"this_year",
+            // period:"month",
+            // metric:`page_actions_post_reactions_like_total,
+            // page_actions_post_reactions_love_total,
+            // page_actions_post_reactions_wow_total,
+            // page_actions_post_reactions_haha_total,
+            // page_actions_post_reactions_sorry_total,
+            // page_actions_post_reactions_anger_total,
+            // page_actions_post_reactions_total`
+            metric:"page_fans"
+        }
+        let pageInsights = await fb.api(`${campaign.fbPageSelected.id}/insights`,options);
+        return fbGetAllPages(pageInsights)
     },
 
     getCampaings: function (adaccountId){

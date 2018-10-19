@@ -12,7 +12,7 @@ import { AuthService } from '../auth.service';
 export class FbAdaccountsComponent implements OnInit {
   adaccounts: Array<object>;
   adaccountSelected:  Boolean;
-  campaignData: Array<object>;
+  campaignData: Boolean;
   spinnerOn: Boolean;
   
 
@@ -37,13 +37,15 @@ export class FbAdaccountsComponent implements OnInit {
     console.log('Account Selected :', selectedId);
     this.spinnerOn=true;
     this.adaccountSelected=true;
-    // this.fbs.getCampaignsData(selectedId).then(data=>{
-    //   console.log(data);
-    //   this.campaignData=data
-    //   this.spinnerOn=false;
-    // });
-    this.dataToSession(selectedId);
-    this.continue();
+    this.fbs.getCampaignsData(selectedId).then(data=>{
+      if (data.length>0) {
+        this.dataToSession(selectedId);
+        this.continue();
+      }else{
+        this.campaignData=false;
+      }
+      this.spinnerOn=false;
+    });
   }
   
   dataToSession(adacId):void{
@@ -53,7 +55,7 @@ export class FbAdaccountsComponent implements OnInit {
 
   selectAdacAgain():void{
     this.adaccountSelected=false;
-    this.campaignData=null;
+    this.campaignData=true;
   }
 
   constructor(private location: Location, private router: Router, private fbs: FacebookLoginService, private auth: AuthService) { }
