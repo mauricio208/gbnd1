@@ -10,6 +10,7 @@ import {Location} from '@angular/common';
 })
 export class PaymentComponent implements OnInit {
   handler: any;
+  paymentReady: Boolean;
   // amount = 500;
 
   back():void{
@@ -19,6 +20,7 @@ export class PaymentComponent implements OnInit {
   constructor(private auth: AuthService, private pay : PaymentService, private location : Location) { }
   
   ngOnInit() {
+    this.paymentReady = false;
     this.handler = StripeCheckout.configure({
       key: "pk_test_GO5CKi1N4FAXudo4HeLpdSh9", // change for enviroment var
       image: '',
@@ -28,6 +30,7 @@ export class PaymentComponent implements OnInit {
           "stripeToken":token,
           "userData":this.auth.getSession()
         })
+        this.paymentReady = true;
       }
     });
   }

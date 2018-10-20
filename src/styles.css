@@ -10,11 +10,12 @@ html, body {
 body {
 	color: #333 !important;
 	background: #fff !important;
-	font: 16px/1.2 "Open Sans", "Arial", sans-serif !important;
+	font: 20pt/1.2 "Open Sans", "Arial", sans-serif !important;
 	min-width: 320px !important;
 	-webkit-font-smoothing: antialiased !important;
 	-moz-osx-font-smoothing: grayscale !important;
 }
+
 
 .gbnd-btn-primary{
     background-color: #4C9EE7;

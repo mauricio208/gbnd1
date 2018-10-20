@@ -56,6 +56,7 @@ export class FbAdaccountsComponent implements OnInit {
   selectAdacAgain():void{
     this.adaccountSelected=false;
     this.campaignData=true;
+    this.spinnerOn=false;
   }
 
   constructor(private location: Location, private router: Router, private fbs: FacebookLoginService, private auth: AuthService) { }
@@ -63,6 +64,7 @@ export class FbAdaccountsComponent implements OnInit {
   ngOnInit() {
     this.getAdAccountsIds()
     this.adaccountSelected = false;
+    this.campaignData = true;
   }
 
 }
