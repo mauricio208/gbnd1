@@ -14,7 +14,7 @@ const httpOptions = {
 export class PaymentService {
   
   async initializeUser(data):Promise<any>{
-    let response = await this.http.post(`${process.env.BACKEND_HOST}/user/init`, JSON.stringify(data), httpOptions).toPromise();
+    let response = await this.http.post(`/user/init`, JSON.stringify(data), httpOptions).toPromise();
     console.log()
 
   }
