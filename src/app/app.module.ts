@@ -16,6 +16,7 @@ import { FbAdaccountsComponent } from './fb-adaccounts/fb-adaccounts.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FbPageComponent } from './fb-page/fb-page.component';
 import { PaymentComponent } from './payment/payment.component';
+import { IntDashboardComponent } from './int-dashboard/int-dashboard.component';
 
 library.add(faFacebook,faCircleNotch)
 @NgModule({
@@ -24,7 +25,8 @@ library.add(faFacebook,faCircleNotch)
     FacebookLoginComponent,
     FbAdaccountsComponent,
     FbPageComponent,
-    PaymentComponent
+    PaymentComponent,
+    IntDashboardComponent
   ],
   imports: [
     BrowserModule,

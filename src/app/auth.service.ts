@@ -6,12 +6,12 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   private userSession;
 
-  getSession():object{
+  getSession(): object {
     return this.userSession;
   }
 
-  addToSession(data:object):void{
-     this.userSession = {...this.userSession, ...data}
+  addToSession(data: object): void {
+     this.userSession = {...this.userSession, ...data};
   }
 
   constructor() { }

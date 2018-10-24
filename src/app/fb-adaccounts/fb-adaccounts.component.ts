@@ -14,55 +14,53 @@ export class FbAdaccountsComponent implements OnInit {
   adaccountSelected:  Boolean;
   campaignData: Boolean;
   spinnerOn: Boolean;
-  
 
-  back():void{
+  back(): void {
     this.location.back();
   }
-  
-  continue():void{
+
+  continue(): void {
     this.router.navigate(['payment']);
   }
 
   getAdAccountsIds(): void {
-    this.spinnerOn=true;
-    this.fbs.getAdAccounts().then(data=>{
-      this.spinnerOn=false;
-      this.adaccounts=data;
-      console.log(data)
+    this.spinnerOn = true;
+    this.fbs.getAdAccounts().then(data => {
+      this.spinnerOn = false;
+      this.adaccounts = data;
     });
   }
 
-  selectAdaccount(selectedId): void{
+  selectAdaccount(selectedId): void {
     console.log('Account Selected :', selectedId);
-    this.spinnerOn=true;
-    this.adaccountSelected=true;
-    this.fbs.getCampaignsData(selectedId).then(data=>{
-      if (data.length>0) {
+    this.spinnerOn = true;
+    this.adaccountSelected = true;
+    this.fbs.getCampaignsData(selectedId).then(data => {
+      if (data.length > 0) {
         this.dataToSession(selectedId);
         this.continue();
-      }else{
-        this.campaignData=false;
+      } else {
+        this.campaignData = false;
       }
-      this.spinnerOn=false;
+      this.spinnerOn = false;
     });
   }
-  
-  dataToSession(adacId):void{
-    this.auth.addToSession({adaccountSelected:adacId});
+
+  dataToSession(adacId): void {
+    this.auth.addToSession({adaccountSelected: adacId});
   }
 
 
-  selectAdacAgain():void{
-    this.adaccountSelected=false;
-    this.campaignData=true;
-    this.spinnerOn=false;
+  selectAdacAgain(): void {
+    this.adaccountSelected = false;
+    this.campaignData = true;
+    this.spinnerOn = false;
   }
 
   constructor(private location: Location, private router: Router, private fbs: FacebookLoginService, private auth: AuthService) { }
 
   ngOnInit() {
-    this.getAdAccountsIds()
+    this.getAdAccountsIds();
     this.adaccountSelected = false;
     this.campaignData = true;
   }

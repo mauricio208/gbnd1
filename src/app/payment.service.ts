@@ -12,16 +12,14 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class PaymentService {
-  
-  async initializeUser(data):Promise<any>{
-    let response = await this.http.post(`/user/init`, JSON.stringify(data), httpOptions).toPromise();
-    console.log()
+
+  async initializeUser(data): Promise<any> {
+    const response = await this.http.post(`/user/init`, JSON.stringify(data), httpOptions).toPromise();
+    return response;
 
   }
 
 
   constructor(private http: HttpClient, private auth: AuthService) { }
-  
-  
 
 }

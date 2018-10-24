@@ -13,23 +13,22 @@ export class PaymentComponent implements OnInit {
   paymentReady: Boolean;
   // amount = 500;
 
-  back():void{
+  back(): void {
     this.location.back();
   }
 
-  constructor(private auth: AuthService, private pay : PaymentService, private location : Location) { }
-  
+  constructor(private auth: AuthService, private pay: PaymentService, private location: Location) { }
   ngOnInit() {
     this.paymentReady = false;
     this.handler = StripeCheckout.configure({
-      key: "pk_test_GO5CKi1N4FAXudo4HeLpdSh9", // change for enviroment var
+      key: 'pk_test_GO5CKi1N4FAXudo4HeLpdSh9', // change for enviroment var
       image: '',
       locale: 'auto',
       token: token => {
         this.pay.initializeUser({
-          "stripeToken":token,
-          "userData":this.auth.getSession()
-        })
+          'stripeToken': token,
+          'userData': this.auth.getSession()
+        });
         this.paymentReady = true;
       }
     });
@@ -45,7 +44,7 @@ export class PaymentComponent implements OnInit {
 
   @HostListener('window:popstate')
     onPopstate() {
-      this.handler.close()
+      this.handler.close();
     }
 }
 
