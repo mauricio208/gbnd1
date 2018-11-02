@@ -1,0 +1,24 @@
+<div class="row row-full-height flex-fill d-flex align-items-center justify-content-center">
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="col-4">
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input [(ngModel)]="credentials.email" type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email" required #email="ngModel">
+        <div [style.visibility]="email.valid || email.pristine ? 'hidden':'visible'"
+            class="alert alert-danger error-msg">
+          Email is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input [(ngModel)]="credentials.password" type="password" class="form-control" id="password" name="password" placeholder="Password" required #password="ngModel">
+        <div [style.visibility]="password.valid || password.pristine ? 'hidden':'visible'"
+            class="alert alert-danger error-msg">
+          Password is required
+        </div>
+      </div>
+
+      <div class="col-12 text-center">
+        <button [disabled]="!loginForm.form.valid" type="submit" class="btn btn-primary btn-lg">Log In</button>
+      </div>
+    </form>
+</div>

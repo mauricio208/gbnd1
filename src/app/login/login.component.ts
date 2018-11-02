@@ -1,0 +1,28 @@
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+
+interface LoginCredentials {
+  email: String;
+  password: String;
+}
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+
+
+
+export class LoginComponent implements OnInit {
+  credentials: LoginCredentials = {email: '', password: ''};
+
+  submitted = false;
+
+  onSubmit() { this.submitted = true; }
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+}

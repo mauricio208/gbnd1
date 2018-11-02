@@ -1,6 +1,5 @@
 const userModel = require('../db/models/user');
 const fbDataModel = require('../db/models/facebookData');
-const fbs = require('./fbService');
 const paging = require('../helpers/dbHelper').paging;
 
 
@@ -18,12 +17,18 @@ module.exports = {
             foreignField: '_id',
             as: 'facebookData' })
         .unwind('facebookData')
-        .addFields({
+        .project({
+            "name":1,
+            "email":1,
+            "facebookData.fbUserID":1,
             "facebookData.gbndFbCampaigns":{
                 adAccountSelected:'$facebookData.gbndFbCampaigns.adAccountSelected',
                 fbPageSelected:'$facebookData.gbndFbCampaigns.fbPageSelected'
             }
         });
-        
     },
+    getPagedAdAccountData: async function (fbUserID, nPerPage, actualPage) {
+        let aggregation = fbDataModel.aggregate().match({fbUserID:fbUserID})
+        return await paging(aggregation, nPerPage, actualPage)
+    }
 }

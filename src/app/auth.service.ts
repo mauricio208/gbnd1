@@ -1,8 +1,16 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+  })
+};
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
   private userSession;
 
@@ -14,5 +22,14 @@ export class AuthService {
      this.userSession = {...this.userSession, ...data};
   }
 
-  constructor() { }
+  async login(credentials: object): Promise<any> {
+    try {
+      const loginData = await this.http.post(`/login`, JSON.stringify(credentials), httpOptions).toPromise();
+      this.addToSession(loginData);
+    } catch (error) {
+      return error;
+    }
+  }
+
+  constructor(private http: HttpClient) { }
 }

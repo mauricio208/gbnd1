@@ -25,3 +25,13 @@ body {
 .flow-buttons>button{
     min-width: 15vh;
 }
+
+.row-full-height{
+	margin-top:-10vh;
+	height:100vh;
+}
+
+.error-msg{
+	font-size: 10pt;
+	padding: 5px;
+}

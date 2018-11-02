@@ -5,6 +5,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var indataRouter = require('./routes/intData');
 var cors = require('cors');
 var app = express();
 
@@ -23,5 +24,6 @@ app.use(express.static(path.join(__dirname, '../dist/growth-bond')));
 console.log(path.join(__dirname, '../dist'));
 
 app.use('/user', usersRouter);
+app.use('/intdata', indataRouter);
 
 module.exports = app;
