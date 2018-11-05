@@ -24,7 +24,7 @@ export class AuthService {
 
   async login(credentials: object): Promise<any> {
     try {
-      const loginData = await this.http.post(`/login`, JSON.stringify(credentials), httpOptions).toPromise();
+      const loginData = await this.http.post(`/user/login`, JSON.stringify(credentials), httpOptions).toPromise();
       this.addToSession(loginData);
     } catch (error) {
       return error;

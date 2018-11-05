@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { AuthService } from '../auth.service';
 
 interface LoginCredentials {
   email: String;
@@ -19,9 +20,12 @@ export class LoginComponent implements OnInit {
 
   submitted = false;
 
-  onSubmit() { this.submitted = true; }
+  onSubmit() {
+    this.submitted = true;
+    this.auth.login(this.credentials);
+  }
 
-  constructor() { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit() {
   }
