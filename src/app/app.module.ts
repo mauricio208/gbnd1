@@ -19,6 +19,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { IntDashboardComponent } from './int-dashboard/int-dashboard.component';
 import { CreateExpertUserComponent } from './create-expert-user/create-expert-user.component';
 import { LoginComponent } from './login/login.component';
+import { httpInterceptorProviders } from './http-interceptor/index';
 
 library.add(faFacebook, faCircleNotch);
 @NgModule({
@@ -41,7 +42,9 @@ library.add(faFacebook, faCircleNotch);
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    httpInterceptorProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

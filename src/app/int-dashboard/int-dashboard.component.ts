@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserDataService } from '../user-data.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-int-dashboard',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IntDashboardComponent implements OnInit {
 
-  constructor() { }
+  private users: Array<object>;
+
+  async getUsers() {
+    this.users = await this.uds.getUsers(5);
+  }
+  constructor(private uds: UserDataService, private auth: AuthService) { }
 
   ngOnInit() {
+    this.getUsers().then(() => console.log('theSession: ', this.users[0])
+
+    );
   }
 
 }

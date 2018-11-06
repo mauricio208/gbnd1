@@ -17,9 +17,10 @@ router.post('/init', function(req, res, next) {
 });
 
 router.post('/login', async function(req, res, next) {
+  console.log('here')
   try {
     let data = req.body;
-    let verf = await authService.userVerify(data.jwt);
+    let verf = await authService.userVerify(data);
     if (verf) {
       res.status(200).json(verf);
     }else{

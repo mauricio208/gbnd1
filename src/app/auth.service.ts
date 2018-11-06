@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { environment } from '../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -13,9 +14,17 @@ const httpOptions = {
 
 export class AuthService {
   private userSession;
+  private loginUrl = `${environment.apiUrl}/user/login`;
 
   getSession(): object {
     return this.userSession;
+  }
+
+  getAuthorizationToken(): string {
+    if (this.userSession) {
+      return this.userSession.jwt;
+    }
+    return undefined;
   }
 
   addToSession(data: object): void {
@@ -24,10 +33,10 @@ export class AuthService {
 
   async login(credentials: object): Promise<any> {
     try {
-      const loginData = await this.http.post(`/user/login`, JSON.stringify(credentials), httpOptions).toPromise();
+      const loginData = await this.http.post(this.loginUrl,  JSON.stringify(credentials), httpOptions).toPromise();
       this.addToSession(loginData);
     } catch (error) {
-      return error;
+      throw error;
     }
   }
 

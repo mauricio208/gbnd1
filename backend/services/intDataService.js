@@ -10,7 +10,7 @@ const paging = require('../helpers/dbHelper').paging;
 module.exports = {
     getPagedUsers: async function(nPerPage, actualPage){
         let aggregation = userModel.aggregate()
-        return await paging(aggregation, nPerPage, actualPage)
+        return await paging(aggregation, Number(nPerPage), Number(actualPage))
         .lookup({ 
             from: fbDataModel.collection.collectionName, 
             localField: 'facebookData',

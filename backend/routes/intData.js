@@ -3,7 +3,8 @@ const router = express.Router();
 const intdataService = require('../services/intDataService');
 
 router.get('/users', function(req, res, next){
-    intdataService.getPagedUsers(req.body.nPerPage, req.body.actualPage).then(data=>{
+    console.log(req.query);
+    intdataService.getPagedUsers(req.query.nPerPage, req.query.actualPage).then(data=>{
         res.send(data)
     })
 });

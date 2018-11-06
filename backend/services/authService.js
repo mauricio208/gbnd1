@@ -17,12 +17,15 @@ function jwtVerify(token){
 
 async function userVerify(data){
     user = await User.findOne({ email: data.email });
-    if(user && user.comparePassword(data.password)){
-        let jwt = jwtSign(user,{});
-        return {
-            jwt:jwt,
-            permissions:user.permissions
-        };
+    if (user) {
+        truePass = await user.comparePassword(String(data.password));
+        if(truePass){
+            let jwt = jwtSign(user,{});
+            return {
+                jwt:jwt,
+                permissions:user.permissions
+            };
+        }
     }
     return false;
 }

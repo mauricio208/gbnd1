@@ -1,4 +1,4 @@
-<div class="row row-full-height flex-fill d-flex align-items-center justify-content-center">
+<div class="row row-full-height flex-fill d-flex align-items-center justify-content-center p-5">
     <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="col-4">
       <div class="form-group">
         <label for="email">Email address</label>
@@ -16,9 +16,12 @@
           Password is required
         </div>
       </div>
-
+      
       <div class="col-12 text-center">
         <button [disabled]="!loginForm.form.valid" type="submit" class="btn btn-primary btn-lg">Log In</button>
+      </div>
+      <div [style.visibility]="!unauthorized ? 'hidden':'visible'" class="alert alert-danger error-msg m-5"> 
+        Login Failed
       </div>
     </form>
 </div>
