@@ -1,4 +1,5 @@
-<div class="row p-5 d-flex justify-content-center">
+<ng-container *ngIf="!selectedUser">
+  <div class="row p-5 d-flex justify-content-center">
     <div class="col-5">
       <h3>All clients</h3>
       <div class="campaings">
@@ -16,7 +17,7 @@
                   <h5 class="card-title">{{user.name}}</h5>
                   <h6 class="card-subtitle mb-2 text-muted">{{user.email}}</h6>
                   <p class="card-text">Campaigns to review : {{user.facebookData.gbndFbCampaigns.length}}</p>
-                  <a href="#" class="card-link">Check campaings</a>
+                  <a (click)="selectUser(user)" href="dashboard#campaigns" class="card-link" >Check campaings</a>
                   <a href="#" class="card-link">mark</a>
                 </div>
               </div>
@@ -33,19 +34,23 @@
       </div>
     </div>
     <div class="col-5">
-        <h3>Marked Clients</h3>
-        <div class="campaings">
-            <ul class="list-group">
-                <div *ngFor="let user of users.slice(1,3)" class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">{{user.name}}</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">{{user.email}}</h6>
-                      <p class="card-text">Campaigns to review : {{user.facebookData.gbndFbCampaigns.length}}</p>
-                      <a href="#" class="card-link">Check campaings</a>
-                      <a href="#" class="card-link">unmark</a>
+          <h3>Marked Clients</h3>
+          <div class="campaings">
+              <ul class="list-group">
+                  <div *ngFor="let user of users.slice(1,3)" class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">{{user.name}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{user.email}}</h6>
+                        <p class="card-text">Campaigns to review : {{user.facebookData.gbndFbCampaigns.length}}</p>
+                        <a href="#" class="card-link">Check campaings</a>
+                        <a href="#" class="card-link">unmark</a>
+                      </div>
                     </div>
-                  </div>
-              </ul>
-          </div>
+                </ul>
+            </div>
     </div>
-</div>
+  </div>
+</ng-container>
+<ng-container *ngIf="selectedUser">
+    <app-campaigns [user]="selectedUser"></app-campaigns>
+</ng-container>

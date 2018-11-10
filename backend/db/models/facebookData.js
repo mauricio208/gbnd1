@@ -5,7 +5,8 @@ var GbndFbCampaign = new Schema({
     adAccountSelected: String,
     fbPageSelected: Object,
     adAccountData:Object,
-    fbPageData:Object
+    fbPageData:Object,
+    addedOn: String,
 });
 
 var FacebookDataSchema = new Schema({

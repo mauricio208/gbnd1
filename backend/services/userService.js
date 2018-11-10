@@ -10,7 +10,8 @@ module.exports = {
                 fbScopes : data.userData.fbScopes,
                 gbndFbCampaigns: [{
                     adAccountSelected: data.userData.adaccountSelected,
-                    fbPageSelected: data.userData.fbpageSelected
+                    fbPageSelected: data.userData.fbpageSelected,
+                    addedOn: Date.now()
                 }] 
             })
             let newFbData = await fbData.save()
@@ -24,7 +25,7 @@ module.exports = {
 
             let newUser = new userModel({
                 name: data.userData.userName,
-                email: data.userData.email,
+                email: data.userData.email? data.userData.email: data.stripe.email,
                 facebookData: newFbData.id,
                 stripeData: data.stripe
             });

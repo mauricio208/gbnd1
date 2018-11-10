@@ -6,6 +6,7 @@ import { FbPageComponent } from './fb-page/fb-page.component';
 import { PaymentComponent } from './payment/payment.component';
 import { LoginComponent } from './login/login.component';
 import { IntDashboardComponent } from './int-dashboard/int-dashboard.component';
+import { CampaignsComponent } from './int-dashboard/campaigns/campaigns.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/fblogin', pathMatch: 'full' },
@@ -14,7 +15,7 @@ const routes: Routes = [
   { path: 'fbadaccounts', component: FbAdaccountsComponent },
   { path: 'fbpage', component: FbPageComponent },
   { path: 'payment', component: PaymentComponent },
-  { path: 'dashboard', component: IntDashboardComponent }
+  { path: 'dashboard', component: IntDashboardComponent },
 ];
 
 @NgModule({

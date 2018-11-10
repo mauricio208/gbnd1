@@ -12,6 +12,7 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
+
 export class UserDataService {
 
   async getUsers(nPerPage= 10, actualPage= 0): Promise<any> {
@@ -22,12 +23,17 @@ export class UserDataService {
         actualPage: String(actualPage)
       }
     };
-    console.log(httpopt);
     return await this.http.get(`${environment.apiUrl}/intdata/users`, httpopt).toPromise();
   }
 
-  async getGbndCampaigns(userFbId): Promise<any> {
-    await this.http.get(`/int/${userFbId}`);
+  async getSatistics(cpId): Promise<any> {
+    const httpopt = {
+      ...httpOptions,
+      params: {
+        cpId: String(cpId),
+      }
+    };
+    return await this.http.get(`${environment.apiUrl}/intdata/campaign`, httpopt).toPromise();
   }
 
   constructor(private http: HttpClient) { }
