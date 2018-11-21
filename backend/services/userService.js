@@ -31,7 +31,6 @@ module.exports = {
             });
             return await newUser.save()
         } catch (error) {
-            console.log(error)
             console.error(error)
             return error;
         }

@@ -26,7 +26,13 @@ async function getPagedUsers(nPerPage, actualPage){
 }
 
 async function getCampaign(cpId){
-    return await fbDataModel.find({"gbndFbCampaigns._id":cpId},{"gbndFbCampaigns.$":1})
+    let cp = await fbDataModel.find({"gbndFbCampaigns._id":cpId},{"gbndFbCampaigns.$":1});
+    cp[0].gbndFbCampaigns[0].fbPageData.pageViews.values.forEach(ob=>{ob.name=ob.end_time.slice(0,10)})
+    cp[0].gbndFbCampaigns[0].fbPageData.pageFans.values.forEach(ob=>{ob.name=ob.end_time.slice(0,10)})
+    cp[0].gbndFbCampaigns[0].adAccountData.actions.forEach(ob=>{ob.name=ob.action_type})
+    cp[0].gbndFbCampaigns[0].adAccountData.cost_per_action_type.forEach(ob=>{ob.name=ob.action_type})
+    return cp;
+
 }
 
 async function getPagedAdAccountData(fbUserID, nPerPage, actualPage) {

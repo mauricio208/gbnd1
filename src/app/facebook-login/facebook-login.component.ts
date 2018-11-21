@@ -21,9 +21,9 @@ export class FacebookLoginComponent implements OnInit {
     this.fbs.logout();
   }
 
-  showAuthData(): void {
-    console.log(this.auth.getSession());
-  }
+  // showAuthData(): void {
+  //   console.log(this.auth.getSession());
+  // }
 
   constructor(private router: Router, private fbs: FacebookLoginService, private auth: AuthService) {
     fbs.init();

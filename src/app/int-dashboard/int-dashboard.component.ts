@@ -14,12 +14,10 @@ export class IntDashboardComponent implements OnInit {
 
   async getUsers() {
     this.users = await this.uds.getUsers(5);
-    console.log(this.users[0]);
   }
 
   async selectUser(user) {
     this.selectedUser = user;
-    console.log(user);
   }
 
   constructor(private uds: UserDataService, private auth: AuthService) { }

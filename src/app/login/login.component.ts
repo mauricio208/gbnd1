@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     this.auth.login(this.credentials)
     .then(() => this.router.navigate(['dashboard']))
     .catch(error => {
-      console.log(error);
+      console.error(error);
       this.unauthorized = true;
     });
   }

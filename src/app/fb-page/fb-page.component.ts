@@ -19,10 +19,7 @@ export class FbPageComponent implements OnInit {
   dataToSession(): void {
     this.auth.addToSession({fbpageSelected: this.pageSelected});
   }
-
-  show(): void {
-    console.log(this.pageSelected);
-  }
+  
   continue(): void {
     this.router.navigate(['fbadaccounts']);
     this.dataToSession();

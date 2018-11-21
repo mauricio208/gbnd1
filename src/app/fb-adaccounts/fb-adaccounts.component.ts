@@ -32,7 +32,6 @@ export class FbAdaccountsComponent implements OnInit {
   }
 
   selectAdaccount(selectedId): void {
-    console.log('Account Selected :', selectedId);
     this.spinnerOn = true;
     this.adaccountSelected = true;
     this.fbs.getCampaignsData(selectedId).then(data => {

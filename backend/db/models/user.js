@@ -14,8 +14,6 @@ var UserSchema = new Schema({
 
 UserSchema.pre('save', function(next) {
     var user = this;
-    console.log('unmodified pass: ',user.password);
-    console.log('user.isModified:',user.isModified('password'))
     if (!user.password || !user.isModified('password')){
         return next();  
     } 
@@ -23,7 +21,6 @@ UserSchema.pre('save', function(next) {
         if (err) return next(err);
         bcrypt.hash(user.password, salt, function(err, hash) {
             if (err) return next(err);
-            console.log(hash);
             user.password = hash;
             next();
         });

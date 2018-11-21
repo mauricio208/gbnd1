@@ -1,0 +1,96 @@
+<div class="row row-fluid w-100">
+
+    <ul class="nav justify-content-center col-12">
+        <li class="nav-item">
+            <span class="nav-link" (click)="setAlternateStat(true)">Ad Account</span>
+        </li>
+        <li class="nav-item">
+            <span class="nav-link" (click)="setAlternateStat(false)">Facebook Page</span>
+        </li>
+        
+    </ul>
+    <div class="adc-stats col-12" *ngIf="alternateStat">
+
+        <div class="col-12 h-25 mt-5">
+            <ngx-charts-number-card
+                [view]="fbAdBasicChartConfig.view"
+                [scheme]="fbAdBasicChartConfig.colorScheme"
+                [results]="fbAdBasicChartConfig.stats"
+                (select)="onSelect($event)">
+            </ngx-charts-number-card>
+        </div>
+
+        <div class="col-12 h-50 mt-5">
+            <ngx-charts-bar-vertical
+                [view]="fbAdActionChartConfig.view"
+                [scheme]="fbAdActionChartConfig.colorScheme"
+                [results]="fbAdActionChartConfig.stats"
+                [gradient]="fbAdActionChartConfig.gradient"
+                [xAxis]="fbAdActionChartConfig.showXAxis"
+                [yAxis]="fbAdActionChartConfig.showYAxis"
+                [legend]="fbAdActionChartConfig.showLegend"
+                [showXAxisLabel]="fbAdActionChartConfig.showXAxisLabel"
+                [showYAxisLabel]="fbAdActionChartConfig.showYAxisLabel"
+                [xAxisLabel]="fbAdActionChartConfig.xAxisLabel"
+                [yAxisLabel]="fbAdActionChartConfig.yAxisLabel"
+                (select)="onSelect($event)">
+            </ngx-charts-bar-vertical>
+        </div>
+    
+        <div class="col-12 h-50 mt-5">
+            <ngx-charts-bar-vertical
+                [view]="fbAdCostActionChartConfig.view"
+                [scheme]="fbAdCostActionChartConfig.colorScheme"
+                [results]="fbAdCostActionChartConfig.stats"
+                [gradient]="fbAdCostActionChartConfig.gradient"
+                [xAxis]="fbAdCostActionChartConfig.showXAxis"
+                [yAxis]="fbAdCostActionChartConfig.showYAxis"
+                [legend]="fbAdCostActionChartConfig.showLegend"
+                [showXAxisLabel]="fbAdCostActionChartConfig.showXAxisLabel"
+                [showYAxisLabel]="fbAdCostActionChartConfig.showYAxisLabel"
+                [xAxisLabel]="fbAdCostActionChartConfig.xAxisLabel"
+                [yAxisLabel]="fbAdCostActionChartConfig.yAxisLabel"
+                (select)="onSelect($event)">
+            </ngx-charts-bar-vertical>
+        </div>  
+    </div>
+    <div class="fbp-stats col-12" *ngIf="!alternateStat">
+        <div class="col-12 h-50 mt-5">
+            <ngx-charts-line-chart
+                [timeline]="fbPageViewChartConfig.timeline"
+                [scheme]="fbPageViewChartConfig.colorScheme"
+                [results]="fbPageViewChartConfig.stats"
+                [gradient]="fbPageViewChartConfig.gradient"
+                [xAxis]="fbPageViewChartConfig.showXAxis"
+                [yAxis]="fbPageViewChartConfig.showYAxis"
+                [legend]="fbPageViewChartConfig.showLegend"
+                [showXAxisLabel]="fbPageViewChartConfig.showXAxisLabel"
+                [showYAxisLabel]="fbPageViewChartConfig.showYAxisLabel"
+                [xAxisLabel]="fbPageViewChartConfig.xAxisLabel"
+                [yAxisLabel]="fbPageViewChartConfig.yAxisLabel"
+                [autoScale]="fbPageViewChartConfig.autoScale"
+                (select)="onSelect($event)">
+            </ngx-charts-line-chart>
+        </div>
+        
+        <div class="col-12 h-50 mt-5">
+            <ngx-charts-line-chart
+                [timeline]="fbPageFansChartConfig.timeline"
+                [scheme]="fbPageFansChartConfig.colorScheme"
+                [results]="fbPageFansChartConfig.stats"
+                [gradient]="fbPageFansChartConfig.gradient"
+                [xAxis]="fbPageFansChartConfig.showXAxis"
+                [yAxis]="fbPageFansChartConfig.showYAxis"
+                [legend]="fbPageFansChartConfig.showLegend"
+                [showXAxisLabel]="fbPageFansChartConfig.showXAxisLabel"
+                [showYAxisLabel]="fbPageFansChartConfig.showYAxisLabel"
+                [xAxisLabel]="fbPageFansChartConfig.xAxisLabel"
+                [yAxisLabel]="fbPageFansChartConfig.yAxisLabel"
+                [autoScale]="fbPageFansChartConfig.autoScale"
+                (select)="onSelect($event)">
+            </ngx-charts-line-chart>
+        </div>
+    </div>
+
+</div>
+

@@ -11,11 +11,11 @@ fb = new FB.Facebook({
 });
 
 async function fbGetAllPages(responseObject){
-    let results = responseObject.data;
+    let results = responseObject.data[0];
     while (responseObject.paging.next){
         response = await got(responseObject.paging.next, {json:true});
         responseObject = response.body;  
-        results = results.concat(responseObject.data);
+        results.values = results.values.concat(responseObject.data[0].values);
     }
     return results;
 }
@@ -29,41 +29,40 @@ module.exports = {
         });
 
         let adaccounts =  await this.getAdaccounts(req.body.authResponse.userID, req.body.authResponse.accessToken)
-        console.log('ADACCOUNTS:',adaccounts)
         return userFbData
     },
 
     getAdaccountInsights: async function(fbUserID, gbndCampaignId, fields) {
         let fbData = await fbDataModel.findOne({fbUserID:fbUserID});
-        console.log('selected', fbData)
         let campaign = fbData.gbndFbCampaigns.id(gbndCampaignId)
         
         fb.setAccessToken(fbData.fbAuthToken);
-        let adaccountsInsights = await fb.api(`${campaign.adAccountSelected}/insights`,{fields:"clicks,frequency,inline_post_engagement"});
+        let adaccountsInsights = await fb.api(`${campaign.adAccountSelected}/insights`,{date_preset:"this_year",fields:"cost_per_action_type,actions,frequency,impressions,reach"});
         
         return fbGetAllPages(adaccountsInsights)
     },
 
     getPageInsights: async function(fbUserID, gbndCampaignId, metrics) {
         let fbData = await fbDataModel.findOne({fbUserID:fbUserID});
-        console.log('selected', fbData)
         let campaign = fbData.gbndFbCampaigns.id(gbndCampaignId)
         fb.setAccessToken(campaign.fbPageSelected.access_token);
+        let endpoint = `${campaign.fbPageSelected.id}/insights`; 
         
-        let options = {
+        let pageFans = await fb.api(endpoint, {
             date_preset:"this_year",
-            // period:"month",
-            // metric:`page_actions_post_reactions_like_total,
-            // page_actions_post_reactions_love_total,
-            // page_actions_post_reactions_wow_total,
-            // page_actions_post_reactions_haha_total,
-            // page_actions_post_reactions_sorry_total,
-            // page_actions_post_reactions_anger_total,
-            // page_actions_post_reactions_total`
+            period:"lifetime",
             metric:"page_fans"
-        }
-        let pageInsights = await fb.api(`${campaign.fbPageSelected.id}/insights`,options);
-        return fbGetAllPages(pageInsights)
+        });
+        pageFans = await fbGetAllPages(pageFans)
+ 
+        let pageViews= await fb.api(endpoint, { 
+            date_preset: 'this_year',
+            period: 'week',
+            metric: 'page_views_total'
+        });
+        pageViews = await fbGetAllPages(pageViews)
+
+        return {pageFans: pageFans, pageViews: pageViews}
     },
 
     getCampaings: function (adaccountId){

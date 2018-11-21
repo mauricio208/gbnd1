@@ -3,14 +3,20 @@
   <h1>{{user.email}}</h1>
 </div>
 
-<div *ngFor="let cp of user.facebookData.gbndFbCampaigns" class="card">
-    <div class="card-body">
-      <h5 class="card-title">
-        <img [src]="cp.fbPageSelected.picture.data.url" class="rounded" alt="Facebook's page thumbnail">
-        {{cp.fbPageSelected.name}}
-      </h5>
-      <h6 class="card-subtitle mb-2 text-muted">{{cp.addedOn}}</h6>
-      
-      <button (click)="reviewCampaign(cp._id)" class="btn btn-primary" >Review</button>
+<ng-container *ngIf="!reviewing">
+    <div *ngFor="let cp of user.facebookData.gbndFbCampaigns" class="card">
+        <div class="card-body">
+          <h5 class="card-title">
+            <img [src]="cp.fbPageSelected.picture.data.url" class="rounded" alt="Facebook's page thumbnail">
+            {{cp.fbPageSelected.name}}
+          </h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{cp.addedOn}}</h6>
+          
+          <button (click)="reviewCampaign(cp._id)" class="btn btn-primary" >Review</button>
+        </div>
     </div>
-</div>
+</ng-container>
+
+<ng-container *ngIf="reviewing">
+  <app-cp-charts [statData]="allData"></app-cp-charts>
+</ng-container>

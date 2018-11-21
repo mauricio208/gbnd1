@@ -9,11 +9,12 @@ import { UserDataService } from '../../user-data.service';
 export class CampaignsComponent implements OnInit {
 
   @Input() user: object;
+  reviewing = false;
   allData: object;
 
   async reviewCampaign(cpId) {
     this.allData = await this.uds.getSatistics(cpId);
-    console.log(this.allData);
+    this.reviewing = true;
   }
 
   constructor(private uds: UserDataService) { }

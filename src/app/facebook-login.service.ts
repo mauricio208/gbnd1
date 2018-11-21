@@ -39,7 +39,6 @@ export class FacebookLoginService {
   async login(loginOptions= { scope: 'ads_read,pages_show_list, read_insights',
     return_scopes: true}): Promise<any> {
     const loginResponse = await this.fb.login(loginOptions);
-    console.log(loginResponse);
     const userNamesEmail = await this.fb.api(`${loginResponse.authResponse.userID}`, 'get', {fields: 'name, email'});
     this.auth.addToSession({
       userName: userNamesEmail.name,
@@ -55,12 +54,12 @@ export class FacebookLoginService {
     this.fb.logout().then(() => console.log('Logged out!'));
   }
 
-  checkLoginStatus(): void {
-    this.fb.getLoginStatus()
-      .then(function(response) {
-        console.log(response);
-      });
-  }
+  // checkLoginStatus(): void {
+  //   this.fb.getLoginStatus()
+  //     .then(function(response) {
+  //       console.log(response);
+  //     });
+  // }
 
   async getAdAccounts(): Promise<any> {
     const userData = this.auth.getSession();
@@ -76,13 +75,7 @@ export class FacebookLoginService {
 
   async getCampaignsData(adacId: String): Promise<any> {
     const campaigns = await this.fb.api(`${adacId}/campaigns`);
-    const cpsCollectedData = [];
-    for (const cp of campaigns.data) {
-      const cpData = await this.fb.api(`${cp.id}`, 'get',
-        {fields: 'name,objective,status,spend_cap,lifetime_budget'});
-      cpsCollectedData.push(cpData);
-    }
-    return cpsCollectedData;
+    return campaigns.data;
   }
 
   async getFbPages(): Promise<any> {

@@ -1,12 +1,19 @@
-<div class="row row-login flex-fill d-flex align-items-center">
-    <div class="col-12 jumbotron text-center justify-content-center">
-            <h1 class="display-4">Welcome to GrowthBond</h1>
-            <p class="lead" >We are pleased to have you with us, to proceed login and authorize us using your facebook account</p>
-            <button (click)="facebookLogin()" class="btn btn-lg btn-facebook-auth" ><fa-icon [icon]="['fab', 'facebook']"></fa-icon>
-                Login to GrowthBond</button>
-    </div>               
-</div>
+<div class="row ">
+    <div class="col-6">
 
+    </div>
+    <div class="col-6">
+        <div class="mx-auto" style="margin-top:20vh;text-align: center">
+            <img class="img-fluid" src="../../../assets/img/svg/dark_logo_transparent.svg"   style="height:15vh;" alt="">
+            <button (click)="facebookLogin()" class="btn btn-lg btn-facebook-auth ">
+                <fa-icon [icon]="['fab', 'facebook']"></fa-icon>
+                Login with Facebook
+            </button>
+            <p class="lead " >We are pleased to have you with us, to proceed login and authorize us using your facebook account</p>
+        </div>
+    </div>
+           
+</div>
 
 
 

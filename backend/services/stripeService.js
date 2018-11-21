@@ -3,8 +3,6 @@ const userModel = require('../db/models/user')
 
 module.exports = {
     createStripeCustomer: async function(clientToken, email, description){
-        console.log('ENV:>>>>>',process.env)
-        console.log('KEY:',process.env['STRIPE_SECRET_KEY'])
         const customer = await stripe.customers.create({
             source: clientToken,
             email: email,
